@@ -36,6 +36,9 @@ function usage
 {
 
 cat  << EOF
+
+Before you begin, you need to setup VPNaaS on the desired IP network from OCI console and obtain the opc_public_ip and secret_key
+
     Usage:
         # install_openswan_vpn.sh --my_public_ip --opc_public_ip --opc_subnet --secret_key
 
