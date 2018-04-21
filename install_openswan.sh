@@ -124,8 +124,9 @@ echo "Installing openswan.."
 
 yum install -y openswan
 
-if rpm -q openswan | rpm -q libreswan ; then
+if !  rpm -q libreswan ; then
         echo "ERROR: failed to install openswan"
+		exit 1
 fi
 
 echo "Configuring system paramters .."
@@ -135,14 +136,19 @@ echo net.ipv4.ip_forward = 1 >> /etc/sysctl.conf
 
 for interface in `ls /proc/sys/net/ipv4/conf/`
 do
+		sed -i "/net.ipv4.conf.$interface.accept_redirects/d" /etc/sysctl.conf
         echo net.ipv4.conf.$interface.accept_redirects = 0 >> /etc/sysctl.conf
+		
+		sed -i "/net.ipv4.conf.$interface.send_redirects/d" /etc/sysctl.conf
         echo net.ipv4.conf.$interface.send_redirects = 0 >> /etc/sysctl.conf
 
+		sed -i "/net.ipv4.conf.$interface.rp_filter/d" /etc/sysctl.conf
         echo net.ipv4.conf.$interface.rp_filter = 2 >> /etc/sysctl.conf
 
 done
 
-sysctl -p
+sysctl -p > /dev/null
+
 iptables -F
 iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
