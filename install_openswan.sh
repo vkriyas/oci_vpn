@@ -165,7 +165,7 @@ config setup
         plutostderrlog=/var/log/pluto.log
         protostack=netkey
         nat_traversal=yes
-        virtual_private=%v4:$MY_SUBNET
+        virtual_private=%v4:$MY_SUBNET,%v4:$OPC_SUBNET
         # OE is now off by default. Uncomment and change to on, to enable.
         oe=off
 conn mysubnet
