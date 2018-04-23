@@ -184,6 +184,7 @@ conn myvpn
         phase2alg=aes256-sha1;modp1024
 EOF
 
+mv /etc/ipsec.secrets /etc/ipsec.secrets.bak
 cat <<EOF >> /etc/ipsec.secrets
 $MY_PUBLIC_IP $OPC_PUBLIC_IP : PSK "$SECRET_KEY"
 EOF
