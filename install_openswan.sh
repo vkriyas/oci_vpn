@@ -8,11 +8,7 @@
 #   DESCRIPTION
 #      This script will setup openswan vpn
 #
-#   BUG REPORT
-#      riyas.vattakkandy@oracle.com
-#
-#
-#
+
 #
 
 
